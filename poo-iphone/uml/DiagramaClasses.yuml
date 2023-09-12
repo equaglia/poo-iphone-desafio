@@ -1,0 +1,41 @@
+// https://yuml.me/diagram/scruffy/class/draw
+// gerador de diagrama de classes YUML
+
+// iPhone Class Diagram
+// -------------------
+//
+[Musica|+nome: String;+autor: String;+duracao:time;+capa:picture|]
+[Dispositivo|+reprodutorMusical;+aparelhoTelefonico;+navegadorInternet|]
+
+[ReprodutorMusical|+play:button;+pause:button;+musicas:Lista;-musicaSelecionada|+tocar();+pausar();+selecionar(musica)]
+
+[AparelhoTelefonico|+meuTelefone:Telefone;+telefones:ListaTelefonica|+ligar(numeroFone);+atender();+iniciarCorreioVoz()]
+[NavegadorInternet|+abas:List(Aba) |+exibirPagina(aba);+adicionarNovaAba();+atualizarPagina(aba)]
+[NavegadorInternet]1-1..*[Aba]
+[Aba|+url|#exibir()]
+
+[_Ferramenta_|+icone;-acesso:Ferramenta| ]
+[<<interface>>Ferramental| |+acessar()]
+
+[Dispositivo]->[ReprodutorMusical]
+[Dispositivo]->[AparelhoTelefonico]
+[Dispositivo]->[NavegadorInternet]
+
+[ReprodutorMusical]1-0..*[ListaMusicas]
+[AparelhoTelefonico]1-1[Telefone]
+[AparelhoTelefonico]1-1[ListaTelefonica]
+[Telefone|+numero:String| ]
+[_Ferramenta_]^-[ReprodutorMusical]
+[_Ferramenta_]^-[AparelhoTelefonico]
+[_Ferramenta_]^-[NavegadorInternet]
+[Ferramental]^-.-[ReprodutorMusical]
+[Ferramental]^-.-[AparelhoTelefonico]
+[Ferramental]^-.-[NavegadorInternet]
+
+
+[<<interface>>;ListaItem| |+apresentarLista()]
+[ListaItem]^-.-[ListaTelefonica|telefones:List(Telefone)| ]
+[ListaItem]^-.-[ListaMusicas|musicas:List(Musica)| ]
+
+[ListaTelefonica]1-0..*[Telefone]
+[ListaMusicas]1-0..*[Musica]
